@@ -1,4 +1,3 @@
-from IPython.display import clear_output
 from colorama import Fore, Back, Style
 
 GAME_ON = "game on"
@@ -7,7 +6,7 @@ PLAYER_1 = "X"
 PLAYER_2 = "O"
 count = 0
 play = True
-list = [' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',]
+list = [' '] * 9
 
 def display_list(list,):
   print(f"----------")
@@ -47,21 +46,14 @@ def update_list(list, choice, user_value):
 
 def check_list(list, user_value, count):
   result = True
-  if((list[0] == list[1] == list[2] == user_value)):
-    return user_value
-  if((list[3] == list[4] == list[5] == user_value)):
-    return user_value
-  if((list[6] == list[7] == list[8] == user_value)):
-    return user_value
-  if((list[0] == list[3] == list[6] == user_value)):
-    return user_value
-  if((list[1] == list[4] == list[7] == user_value)):
-    return user_value
-  if((list[2] == list[5] == list[8] == user_value)):
-    return user_value
-  if((list[0] == list[4] == list[8] == user_value)):
-    return user_value
-  if((list[2] == list[4] == list[6] == user_value)):
+  if((list[0] == list[1] == list[2] == user_value) or
+     (list[3] == list[4] == list[5] == user_value) or
+     (list[6] == list[7] == list[8] == user_value) or
+     (list[0] == list[3] == list[6] == user_value) or
+     (list[1] == list[4] == list[7] == user_value) or
+     (list[2] == list[5] == list[8] == user_value) or
+     (list[0] == list[4] == list[8] == user_value) or
+     (list[2] == list[4] == list[6] == user_value)):
     return user_value
 
   if(' ' in list):
@@ -85,18 +77,11 @@ def check_result(result):
 
 while play:
   count += 1
-
   user_value = get_user_value(count)
-
   user_choice = get_user_choice(list)
-
   list = update_list(list, user_choice, user_value)
-
-  clear_output()
   display_list(list)
-
   result = check_list(list, user_value, count)
-
   play = check_result(result)
 
 
